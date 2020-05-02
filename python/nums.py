@@ -1,0 +1,10 @@
+v=1j
+print(type(v))
+x=11111111111777777777777777777777777
+y=837394748
+print(x+y)
+en=32e45
+print(en)
+cx=str(2)
+cy="5"
+print(cx+cy)

@@ -1,0 +1,11 @@
+n=int(input())
+a=['o']*n
+f1=1
+f2=2
+a[f1-1]='O'
+while(f2<=n):
+    a[f2-1]='O'
+    t=f1+f2
+    f1=f2
+    f2=t
+print(''.join(a))

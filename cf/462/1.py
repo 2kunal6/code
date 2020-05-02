@@ -1,0 +1,10 @@
+input()
+a=list(map(int, input().split(sep=' ')))
+b=list(map(int, input().split(sep=' ')))
+n=len(a)
+m=len(b)
+a.sort()
+b.sort()
+v=[b[0]*a[0], b[0]*a[1], b[m-1]*a[n-1], b[m-1]*a[n-2]]
+v.sort()
+print(v[len(v)-2])
