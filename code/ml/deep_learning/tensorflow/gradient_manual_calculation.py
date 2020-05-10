@@ -1,0 +1,103 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "nn.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyNcGgdO6BXm4K+irQLOeUAU",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/2kunal6/code/blob/master/code/ml/deep_learning/tensorflow/gradient_manual_calculation.py\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "qz0ASg4xmvUM",
+        "colab_type": "code",
+        "outputId": "41a68206-ab64-4535-d87f-32f94dc53c03",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 306
+        }
+      },
+      "source": [
+        "import numpy as np\n",
+        "\n",
+        "x = np.array([1,2,3,5], dtype=np.float32)\n",
+        "# y=x**2\n",
+        "y = np.array([2,4,6,10], dtype=np.float32)\n",
+        "\n",
+        "w = 0.0\n",
+        "\n",
+        "def forward(x):\n",
+        "  return w*x\n",
+        "\n",
+        "# MSE\n",
+        "def calc_loss(y, y_pred):\n",
+        "  return ((y-y_pred)**2).mean()\n",
+        "\n",
+        "# gradient of MSE dJ/dw = 1/N 2x (w*x - y)\n",
+        "def calc_gradient(x, y, y_pred):\n",
+        "  return (np.dot(2*x, y_pred - y)).mean()\n",
+        "\n",
+        "print(\"prediction before training : \", forward(10))\n",
+        "\n",
+        "learning_rate = 0.01\n",
+        "\n",
+        "for epoch in range(15):\n",
+        "  y_pred = forward(x)\n",
+        "\n",
+        "  loss = calc_loss(y, y_pred)\n",
+        "\n",
+        "  grad = calc_gradient(x, y, y_pred)\n",
+        "\n",
+        "  w -= learning_rate * grad\n",
+        "\n",
+        "  print(\"epoch : \", epoch, \"weight : \", w, \"loss : \", loss)\n",
+        "\n",
+        "print(\"prediction after training : \", forward(10))"
+      ],
+      "execution_count": 1,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "prediction before training :  0.0\n",
+            "epoch :  0 weight :  1.56 loss :  39.0\n",
+            "epoch :  1 weight :  1.9032000732421874 loss :  1.8876004\n",
+            "epoch :  2 weight :  1.978704090118408 loss :  0.09135988\n",
+            "epoch :  3 weight :  1.9953149008750914 loss :  0.0044217794\n",
+            "epoch :  4 weight :  1.9989692306518554 loss :  0.00021400844\n",
+            "epoch :  5 weight :  1.9997732138633728 loss :  1.0358798e-05\n",
+            "epoch :  6 weight :  1.999950077533722 loss :  5.012942e-07\n",
+            "epoch :  7 weight :  1.9999890422821045 loss :  2.4330962e-08\n",
+            "epoch :  8 weight :  1.9999976444244385 loss :  1.1858674e-09\n",
+            "epoch :  9 weight :  1.9999994564056396 loss :  5.2637006e-11\n",
+            "epoch :  10 weight :  1.9999999165534972 loss :  3.399947e-12\n",
+            "epoch :  11 weight :  2.000000052452087 loss :  3.0198066e-13\n",
+            "epoch :  12 weight :  2.000000052452087 loss :  0.0\n",
+            "epoch :  13 weight :  2.000000052452087 loss :  0.0\n",
+            "epoch :  14 weight :  2.000000052452087 loss :  0.0\n",
+            "prediction after training :  20.00000052452087\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    }
+  ]
+}
